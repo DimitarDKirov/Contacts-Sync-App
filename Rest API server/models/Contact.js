@@ -8,9 +8,12 @@ const pasteSchema = new mongoose.Schema({
         minlength: 3,
         required: true
     },
-    phone: {
+    phoneNumber: {
         type: String,
         required: true
+    },
+    company: {
+        type: String
     },
     notes: {
         type: String

@@ -17,7 +17,7 @@ module.exports = function (models) {
 
             const newUser = {
                 username: user.username,
-                phone: user.phone,
+                phoneNumber: user.phoneNumber,
                 salt,
                 passHash
             };

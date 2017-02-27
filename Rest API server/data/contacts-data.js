@@ -9,8 +9,9 @@ module.exports = function (models) {
         createContact(contactData, user) {
             let contact = {
                 name: contactData.name,
-                phone: contactData.phone,
+                phoneNumber: contactData.phoneNumber,
                 notes: contactData.notes,
+                company: contactData.company,
                 createdBy: user.username,
                 createdAt: new Date()
             };

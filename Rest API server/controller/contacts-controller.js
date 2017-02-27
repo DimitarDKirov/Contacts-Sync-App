@@ -20,7 +20,7 @@ module.exports = function (data) {
                 // if (!verify(contact.name)) {
                 //     return res.status(400).json({
                 //         success: false,
-                //         message: `Name must be at least ${MIN_LENGTH} symbols long ${contact.name}: ${contact.phone}`
+                //         message: `Name must be at least ${MIN_LENGTH} symbols long ${contact.name}: ${contact.phoneNumber}`
                 //     });
                 // }
                 data.createContact(contact, req.user)
@@ -42,8 +42,9 @@ module.exports = function (data) {
             let contactId = req.params.contactId;
             let updatedData = {};
             if (typeof req.body.name !== "undefined") updatedData['name'] = req.body.name;
-            if (typeof req.body.phone !== "undefined") updatedData['phone'] = req.body.phone;
+            if (typeof req.body.phoneNumber !== "undefined") updatedData['phoneNumber'] = req.body.phoneNumber;
             if (typeof req.body.notes !== "undefined") updatedData['notes'] = req.body.notes;
+            if (typeof req.body.company !== "undefined") updatedData['company'] = req.body.company;
 
             data.updateContact(contactId, updatedData)
                 .then(dbContact => res.status(200).json({

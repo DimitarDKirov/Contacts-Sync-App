@@ -45,7 +45,7 @@ module.exports = function (data) {
             const user = {
                 username: req.body.username,
                 password: req.body.password,
-                phone: req.body.phone
+                phoneNumber: req.body.phoneNumber
             };
 
             if (user.username.length < 3) {
