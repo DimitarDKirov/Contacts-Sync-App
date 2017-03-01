@@ -5,11 +5,15 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "teamwork.contacts_sync_app"
-        minSdkVersion 16
+        minSdkVersion 24
         targetSdkVersion 25
         versionCode 16
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        jackOptions {
+            enabled true
+        }
     }
     buildTypes {
         release {
@@ -26,7 +30,9 @@ dependencies {
     })
 
 
-
+    compile('com.mikepenz:materialdrawer:5.8.1@aar') {
+        transitive = true
+    }
     compile 'com.android.support:appcompat-v7:25.1.1'
     compile 'com.android.support:support-v4:25.1.1'
     compile 'com.android.support:design:25.1.1'
