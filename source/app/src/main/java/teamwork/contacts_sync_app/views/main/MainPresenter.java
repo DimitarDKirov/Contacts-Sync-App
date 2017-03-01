@@ -20,7 +20,9 @@ public class MainPresenter
         this.contacts = new Contact[] {
                 new Contact("Angel", "0888888888", "Home"),
                 new Contact("Dimitar", "0889000000", "Home"),
-                new Contact("Samuil", "0888666666", "Home")};
+                new Contact("Samuil", "0888666666", "Home"),
+                new Contact("Peter", "0888666666", "Home")
+        };
     }
 
     public void start() {

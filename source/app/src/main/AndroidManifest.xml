@@ -8,14 +8,20 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.main.MainActivity">
+        <activity
+            android:name=".views.main.MainActivity"
+            android:theme="@style/Theme.Design.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.details.DetailsActivity"></activity>
+        <activity
+            android:name=".views.details.DetailsActivity"
+            android:theme="@style/Theme.Design.NoActionBar"
+            />
+        <activity android:name=".views.navigations.DrawerActivity" />
     </application>
 
 </manifest>
