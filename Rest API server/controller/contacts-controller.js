@@ -50,7 +50,7 @@ module.exports = function (data) {
                 .then(dbContact => res.status(200).json({
                     success: true,
                     message: 'Contact updated',
-                    contact: dbContact
+                    object: dbContact
                 }))
                 .catch(err => res.status(500).json({
                     success: false,
@@ -63,7 +63,7 @@ module.exports = function (data) {
                 .then(dbContact => res.status(200).json({
                     success: true,
                     message: 'Contact deleted',
-                    contact: dbContact
+                    object: dbContact
                 }))
                 .catch(err => res.status(500).json({
                     success: false,

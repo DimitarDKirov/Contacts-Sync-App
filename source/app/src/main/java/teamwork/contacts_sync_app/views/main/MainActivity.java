@@ -2,13 +2,13 @@ package teamwork.contacts_sync_app.views.main;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 
 import teamwork.contacts_sync_app.R;
+import teamwork.contacts_sync_app.views.navigations.DrawerActivity;
 import teamwork.contacts_sync_app.views.ui.ModalFactory;
 import teamwork.contacts_sync_app.views.ui.Notifier;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends DrawerActivity {
     public MainContracts.Presenter mainPresenter;
 
     @Override

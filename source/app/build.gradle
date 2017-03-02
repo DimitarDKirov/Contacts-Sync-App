@@ -5,11 +5,15 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "teamwork.contacts_sync_app"
-        minSdkVersion 16
+        minSdkVersion 24
         targetSdkVersion 25
         versionCode 16
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        jackOptions {
+            enabled true
+        }
     }
     buildTypes {
         release {
@@ -25,8 +29,9 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-
-
+    compile('com.mikepenz:materialdrawer:5.8.1@aar') {
+        transitive = true
+    }
     compile 'com.android.support:appcompat-v7:25.1.1'
     compile 'com.android.support:support-v4:25.1.1'
     compile 'com.android.support:design:25.1.1'
@@ -35,4 +40,5 @@ dependencies {
     compile 'com.github.johnpersano:supertoasts:2.0'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.9'
+    compile project(path: ':data')
 }

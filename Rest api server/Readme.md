@@ -101,7 +101,7 @@ Routes Contact
 -------
 All routes are authenticated - user must send token as header x-token
 
- - POST /api/contacts - adds contacts as array:
+ - POST /api/contact - adds contacts as array:
 ```javascript
 {"contacts":[{
 	"name":"user1",
@@ -121,7 +121,7 @@ Message if insert is OK:
   "message": "Contacts created"
 }
 ```
- - GET /api/contacts - returns all contacts
+ - GET /api/contact - returns all contacts
 ```javascript
   [
   {
@@ -166,7 +166,7 @@ Returns:
 {
   "success": true,
   "message": "Contact updated",
-  "contact": {
+  "object": {
     "_id": "58b390717c33a04c446421c8",
     "name": "user2",
     "phoneNumber": "082222",
@@ -184,7 +184,7 @@ Returns
 {
   "success": true,
   "message": "Contact deleted",
-  "contact": {
+  "object": {
     "_id": "58b2cccc9a7456141815dfd4",
     "name": "mitko2",
     "phone": "123",
