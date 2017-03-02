@@ -1,22 +1,27 @@
 package mitko.data.models;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.Date;
+
 /**
  * Created by dimki on 01.03.2017 г..
  */
 
 public class ContactDb {
+    @SerializedName("_id")
     private String id;
     private String name;
     private String phoneNumber;
     private String notes;
     private String company;
     private String createdBy;
-    private String createdAt;
+    private Date createdAt;
 
     public ContactDb() {
     }
 
-    public ContactDb(String id, String name, String phoneNumber, String notes, String company, String createdBy, String createdAt) {
+    public ContactDb(String id, String name, String phoneNumber, String notes, String company, String createdBy, Date createdAt) {
         this();
         this.id = id;
         this.name = name;
@@ -25,6 +30,12 @@ public class ContactDb {
         this.company = company;
         this.createdBy = createdBy;
         this.createdAt = createdAt;
+    }
+
+    public ContactDb(String name, String phoneNumber, String company) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.company = company;
     }
 
     public String getNotes() {
@@ -75,11 +86,11 @@ public class ContactDb {
         this.createdBy = createdBy;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 }

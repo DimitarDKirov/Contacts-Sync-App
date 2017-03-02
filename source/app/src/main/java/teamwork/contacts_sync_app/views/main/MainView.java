@@ -14,6 +14,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import teamwork.contacts_sync_app.R;
 import teamwork.contacts_sync_app.views.details.DetailsActivity;
 import teamwork.contacts_sync_app.views.models.Contact;
@@ -54,7 +56,10 @@ public class MainView
         this.btnAdd.setOnClickListener(this);
 
         //  Start the presenter
-        this.presenter.start();
+        this.presenter.start()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
 
         return root;
     }
@@ -95,8 +100,10 @@ public class MainView
             names.add(item.getName());
         }
 
-        this.adapter.clear();
-        this.adapter.addAll(names);
+        this.getActivity().runOnUiThread(() -> {
+                adapter.clear();
+                this.adapter.addAll(names);
+            });
     }
 
     public void notifyText(String text) {

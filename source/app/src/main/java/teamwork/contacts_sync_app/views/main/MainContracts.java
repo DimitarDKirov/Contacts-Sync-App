@@ -1,5 +1,6 @@
 package teamwork.contacts_sync_app.views.main;
 
+import io.reactivex.Observable;
 import teamwork.contacts_sync_app.views.models.Contact;
 import teamwork.contacts_sync_app.views.ui.ModalFactory;
 import teamwork.contacts_sync_app.views.ui.Notifier;
@@ -22,7 +23,7 @@ public class MainContracts {
     }
 
     public interface Presenter {
-        void start();
+        Observable<Boolean> start();
 
         MainContracts.View getView();
 

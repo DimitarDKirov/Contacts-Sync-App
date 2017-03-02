@@ -1,8 +1,8 @@
 package teamwork.contacts_sync_app.views.main;
 
-import java.util.Arrays;
-
-import mitko.data.dataServices.ContactDataService;
+import io.reactivex.Observable;
+import io.reactivex.functions.Function;
+import teamwork.contacts_sync_app.views.dataServices.ContactDataService;
 import teamwork.contacts_sync_app.views.models.Contact;
 import teamwork.contacts_sync_app.views.ui.ModalFactory;
 import teamwork.contacts_sync_app.views.ui.Notifier;
@@ -28,20 +28,18 @@ public class MainPresenter
         };
     }
 
-    public void start() {
-//        ContactDataService data = new ContactDataService();
-//        data.getContacts()
-//                .map(contactDbs -> {
-//                    return (Contact[]) Arrays.stream(contactDbs).map(contact -> {
-//                        return new Contact(contact.getName(), contact.getPhoneNumber(), contact.getCompany());
-//                    })
-//                            .toArray(Contact[]::new);
-//                })
-//                .subscribe(contactsDb -> {
-//                    this.contacts = contactsDb;
-//                    this.getView().setContacts(this.contacts);
-//                });
-      this.getView().setContacts(this.contacts);
+    public Observable<Boolean> start() {
+        ContactDataService data = new ContactDataService();
+        return data.getContacts()
+                .map(new Function<Contact[], Boolean>() {
+                    @Override
+                    public Boolean apply(Contact[] contactsDb) throws Exception {
+                        contacts = contactsDb;
+                        getView().setContacts(contactsDb);
+                        return true;
+                    }
+                });
+        //this.getView().setContacts(this.contacts);
     }
 
     @Override
