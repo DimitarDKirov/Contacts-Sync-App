@@ -19,7 +19,7 @@ public class MainActivity extends DrawerActivity {
         MainView mainView = new MainView();
         ModalFactory modalFactory = new ModalFactory();
         Notifier notifier = new Notifier();
-        this.mainPresenter = new MainPresenter(mainView, modalFactory, notifier);
+        this.mainPresenter = new MainPresenter(mainView, modalFactory, notifier, this);
 
         this.getSupportFragmentManager()
                 .beginTransaction()

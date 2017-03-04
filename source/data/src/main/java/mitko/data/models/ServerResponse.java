@@ -1,14 +1,16 @@
 package mitko.data.models;
 
 public class ServerResponse<T> {
+    private String token;
     private Boolean success;
     private String message;
     private T object;
 
-    public ServerResponse(Boolean success, String message, T object) {
+    public ServerResponse(Boolean success, String message, T object, String token) {
         this.setSuccess(success);
         this.setMessage(message);
         this.setObject(object);
+        this.setToken(this.token);
     }
 
     public ServerResponse() {
@@ -36,5 +38,13 @@ public class ServerResponse<T> {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

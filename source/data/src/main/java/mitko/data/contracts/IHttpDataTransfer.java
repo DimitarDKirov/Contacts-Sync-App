@@ -10,7 +10,13 @@ public interface IHttpDataTransfer<T> {
 
     Observable<ServerResponse<T>> add(T[] objects);
 
+    Observable<ServerResponse<T>> post(T object);
+
     Observable<ServerResponse<T>> update(Object id, T object);
 
     Observable<ServerResponse<T>> delete(Object id);
+
+    void setUrl(String url);
+
+    void setToken(String token);
 }

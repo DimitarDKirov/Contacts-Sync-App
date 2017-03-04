@@ -1,19 +1,14 @@
 package teamwork.contacts_sync_app.views.dataServices;
 
-import android.provider.SyncStateContract;
-
-import java.util.Arrays;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 import mitko.data.Constants;
-import mitko.data.HttpTransfer;
+import mitko.data.HttpDataTransfer;
 import mitko.data.contracts.IHttpDataTransfer;
 import mitko.data.models.ContactDb;
-import mitko.data.models.ServerResponse;
 import teamwork.contacts_sync_app.views.models.Contact;
 
 /**
@@ -22,15 +17,18 @@ import teamwork.contacts_sync_app.views.models.Contact;
 
 public class ContactDataService {
     private static final String contactUrl = "/api/contact";
+    private final Context context;
     private IHttpDataTransfer<ContactDb> httpData;
 
-    public ContactDataService() {
+    public ContactDataService(Context context) {
         String url = Constants.serverUrl + contactUrl;
-        String token = "eyJhbGciOiJIUzI1NiJ9.NThiMDM2MTYyYzI5Y2IxMWNjMzlmMGQz.e1COer6A7GofTffAl1gZpzGEzVUR5JcqPtBjQ_aEhjs";
-        this.httpData = new HttpTransfer<ContactDb>(url, token, ContactDb.class, ContactDb[].class);
+
+        this.httpData = new HttpDataTransfer<ContactDb>(url, ContactDb.class, ContactDb[].class);
+        this.context=context;
     }
 
     public Observable<Contact[]> getContacts() {
+        this.setToken();
         return this.httpData.getAll()
                 .map(contactDbs -> {
                     Contact[] contacts = new Contact[contactDbs.length];
@@ -43,21 +41,24 @@ public class ContactDataService {
     }
 
     public Observable<Contact> getContactById(String id) {
+        this.setToken();
         return this.httpData.getById(id)
                 .map(contactDb -> new Contact(contactDb.getName(), contactDb.getPhoneNumber(), contactDb.getCompany()));
     }
 
     public Observable<Boolean> createContacts(Contact[] contacts) {
+        this.setToken();
         ContactDb[] contactsDb = new ContactDb[contacts.length];
         for (int i = 0; i < contacts.length; i++) {
             contactsDb[i] = new ContactDb(contacts[i].getName(), contacts[i].getNumber(), contacts[i].getCompany());
         }
 
         return this.httpData.add(contactsDb)
-                .map(contactDbServerResponse -> contactDbServerResponse.getSuccess() == true);
+                .map(contactDbServerResponse -> contactDbServerResponse.getSuccess());
     }
 
     public Observable<Contact> updateContact(String id, Contact contact) {
+        this.setToken();
         ContactDb contactDb = new ContactDb(contact.getName(), contact.getNumber(), contact.getCompany());
         return this.httpData.update(id, contactDb)
                 .map(contactDbServerResponse -> {
@@ -68,6 +69,12 @@ public class ContactDataService {
 
     public Observable<Boolean> deleteContact(String id) {
         return this.httpData.delete(id)
-                .map(contactDbServerResponse -> contactDbServerResponse.getSuccess() == true);
+                .map(contactDbServerResponse -> contactDbServerResponse.getSuccess());
+    }
+
+    private void setToken(){
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+        String token = settings.getString(Constants.TOKEN_KEY, "");
+        this.httpData.setToken(token);
     }
 }
